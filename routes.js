@@ -51,10 +51,10 @@ router.post("/add/", async function(req, res, next) {
 router.get("/:id/", async function(req, res, next) {
   try {
     const customer = await Customer.get(req.params.id);
-
+    const fullName = await Customer.fullName(customer);
     const reservations = await customer.getReservations();
 
-    return res.render("customer_detail.html", { customer, reservations });
+    return res.render("customer_detail.html", { customer, fullName, reservations });
   } catch (err) {
     return next(err);
   }
@@ -65,8 +65,9 @@ router.get("/:id/", async function(req, res, next) {
 router.get("/:id/edit/", async function(req, res, next) {
   try {
     const customer = await Customer.get(req.params.id);
+    const fullName = await Customer.fullName(customer);
 
-    res.render("customer_edit_form.html", { customer });
+    res.render("customer_edit_form.html", { customer, fullName });
   } catch (err) {
     return next(err);
   }

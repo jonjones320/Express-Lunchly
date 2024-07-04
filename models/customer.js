@@ -15,7 +15,7 @@ class Customer {
   }
 
   
-  /** find all customers. */
+  /** get customers full name */
 
   static async fullName(customer) {
     return `${customer.firstName} ${customer.lastName}`
